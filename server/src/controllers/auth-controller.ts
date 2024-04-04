@@ -16,6 +16,7 @@ class AuthController {
                 if (isMatch) {
                     jwt.sign({ user: user }, 'secretKey', (_: any, token: any) => {
                         response.status(200).send({
+                            message:'Welcome',
                             user: {
                                 username: user.username,
                                 email: user.email,
@@ -25,14 +26,14 @@ class AuthController {
                         });
                     });
                 } else {
-                    response.status(404).send({ message: ' کلمه عبور اشتباه است' });
+                    response.status(404).send({ message: 'The password is wrong' });
                 }
             } else {
-                response.status(404).send({ message: 'نام کاربری یا کلمه عبور اشتباه است' });
+                response.status(404).send({ message: 'The username or password is incorrect' });
             }
 
         } catch (error) {
-            response.status(500).send({ message: "مشکلی پیش امده " });
+            response.status(500).send({ message: "There is a problem" });
         }
     }
 
@@ -40,13 +41,13 @@ class AuthController {
         try {
             const { username, email, password } = req.body;
             if (!username || !email || !password) {
-                return res.status(400).json({ error: 'لطفا اطلاعات خود را وارد کنید' });
+                return res.status(400).json({ message: 'Please enter your information' });
             }
             const existing_email: IUser | null = await User.findOne({ email });
             const existing_username: IUser | null = await User.findOne({ username });
 
             if (existing_email || existing_username) {
-                res.status(400).json({ error: 'کاربر از قبل وجود دارد' });
+                res.status(400).json({ message: 'User already exists' });
                 return;
             }
 
@@ -56,10 +57,9 @@ class AuthController {
 
             await newUser.save();
 
-            res.status(201).json({ message: 'کاربر با موفقیت ثبت نام کرد' });
+            res.status(201).json({ message: 'Registration completed. Please log in to your account' });
         } catch (err) {
-
-            res.status(500).json({ error: 'خطای سرور داخلی' });
+            res.status(500).json({ message: 'Internal server error' });
         }
     }
 }

@@ -1,5 +1,5 @@
+'use client'
 import { ReactNode } from "react";
-
 interface TextProps {
     className?: string;
     type?: string;
@@ -11,7 +11,7 @@ interface TextProps {
     icon?: ReactNode
 }
 
-const Text: React.FC<TextProps> = ({ className, type, name, title, defaultValue, onChange, value, icon }) => {
+export const Text: React.FC<TextProps> = ({ className, type, name, title, defaultValue, onChange, value, icon }) => {
     return (
         <div className={'inputs ' + className}>
             <input
@@ -45,7 +45,7 @@ interface TextareaProps {
     value?: string | number
 }
 
-const Textarea: React.FC<TextareaProps> = ({ className, name, title, defaultValue, onChange, value }) => {
+export const Textarea: React.FC<TextareaProps> = ({ className, name, title, defaultValue, onChange, value }) => {
     return (
         <div className={'inputs ' + className}>
             <textarea
@@ -64,5 +64,3 @@ const Textarea: React.FC<TextareaProps> = ({ className, name, title, defaultValu
         </div>
     );
 };
-
-export const Inputs = { Text, Textarea }
