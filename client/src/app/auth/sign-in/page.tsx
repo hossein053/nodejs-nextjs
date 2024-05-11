@@ -23,7 +23,14 @@ export default async function Page() {
             const new_response = await response.json();
             cookies().set('toast', JSON.stringify(new_response.message))
             if (response.status === 200) {
-                cookies().set('user', JSON.stringify(new_response))
+                cookies().set({
+                    name: 'user',
+                    value: JSON.stringify(new_response)
+                })
+                cookies().set({
+                    name: 'token',
+                    value: JSON.stringify(new_response.token)
+                })
                 redirect('/dashboard')
             }
         })

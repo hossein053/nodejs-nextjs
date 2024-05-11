@@ -5,13 +5,18 @@ const auth = [
 ];
 export function middleware(request: NextRequest) {
     const url = request.nextUrl.pathname;
-    const user = request.cookies.get('user')
+    const token = request.cookies.get('token')
 
-    if (user && auth.find(path => url.includes(path))) {
-        return NextResponse.redirect(new URL('/dashboard', request.url));
+    if (token) {
+        if (auth.find(path => url.includes(path))) {
+            return NextResponse.redirect(new URL('/dashboard', request.url));
+        }
+        if (url === '/') {
+            return NextResponse.redirect(new URL('/dashboard', request.url));
+        }
     }
-    
-    if (!user && !auth.find(path => url.includes(path))) {
+
+    if (!token && !auth.find(path => url.includes(path))) {
         return NextResponse.redirect(new URL('/auth/sign-in', request.url))
     }
 

@@ -9,8 +9,8 @@ const mongoURI = 'mongodb://127.0.0.1:27017/production';
 
 mongoose.connect(mongoURI).then(() => {
     console.log('Connecting to MongoDB')
-    
-    app.use(express.urlencoded({ extended: true }))
+
+    app.use(express.urlencoded({ extended: true }));
     app.use(express.json());
     app.use(cors())
     app.use(api);

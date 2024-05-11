@@ -2,8 +2,8 @@
 export default async function Page() {
   
   return (
-    <main className="p-5">
+    <div>
       dvzssc
-    </main>
+    </div>
   );
 }

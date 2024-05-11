@@ -1,8 +1,9 @@
 
 import { Request, Response } from 'express';
-import User, { IUser } from '../models/user';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
+import { IUser, User } from '../models';
+import { validationResult } from 'express-validator';
 
 class AuthController {
 
@@ -16,7 +17,7 @@ class AuthController {
                 if (isMatch) {
                     jwt.sign({ user: user }, 'secretKey', (_: any, token: any) => {
                         response.status(200).send({
-                            message:'Welcome',
+                            message: 'Welcome',
                             user: {
                                 username: user.username,
                                 email: user.email,
@@ -38,11 +39,15 @@ class AuthController {
     }
 
     async register(req: Request, res: Response) {
+
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(400).json({ message: errors.array().map(err => { return err.msg }) });
+        }
+
         try {
             const { username, email, password } = req.body;
-            if (!username || !email || !password) {
-                return res.status(400).json({ message: 'Please enter your information' });
-            }
+
             const existing_email: IUser | null = await User.findOne({ email });
             const existing_username: IUser | null = await User.findOne({ username });
 
@@ -53,7 +58,7 @@ class AuthController {
 
             const hashedPassword: string = await bcrypt.hash(password, 10);
 
-            const newUser: IUser = new User({ username, email, password: hashedPassword });
+            const newUser: IUser = new User({ username, email, password: hashedPassword, rol: 'user' });
 
             await newUser.save();
 

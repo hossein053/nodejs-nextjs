@@ -2,18 +2,22 @@
 @tailwind components;
 @tailwind utilities;
 
+body{
+    @apply flex justify-between h-screen bg-background text-black font-normal p-3;
+}
+
 .inputs {
     @apply relative my-2 row-start;
 
     .peer {
-        @apply w-full outline-none border-b-2 border-b-purple_55 rounded-lg p-2.5 ltr;
+        @apply w-full bg-white text-black outline-none border-b-2 border-b-purple_55 rounded-lg p-2.5 ltr;
 
         &::placeholder {
             @apply text-transparent;
         }
 
         &:not(:placeholder-shown)~.lable-peer {
-            @apply -top-3 text-xs bg-white text-purple_25 px-2;
+            @apply -top-3 text-xs bg-white rounded-sm text-purple_25 px-2;
 
             .icon {
                 @apply hidden;
@@ -21,7 +25,7 @@
         }
 
         &:focus~.lable-peer {
-            @apply -top-3 text-xs bg-white text-purple_25 px-2;
+            @apply -top-3 text-xs bg-white rounded-sm text-purple_25 px-2;
 
             .icon {
                 @apply hidden;

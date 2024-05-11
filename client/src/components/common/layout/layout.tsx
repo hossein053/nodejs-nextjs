@@ -1,15 +1,15 @@
-import React, { ReactNode } from 'react'
-import { Header } from './header'
+import React, { Fragment, ReactNode } from 'react'
+import { Sidebar } from './sidebar'
 
 export const Layout = ({ children }: { children: ReactNode }) => {
   return (
-    <>
-      <div className='bg-gray-300'>
-        <Header />
-      </div>
-      <main>
-        {children}
+    <Fragment>
+      <Sidebar />
+      <main className='w-full ps-3'>
+        <div className='shadow-xs bg-primary h-full rounded-md'>
+          {children}
+        </div>
       </main>
-    </>
+    </Fragment>
   )
 }

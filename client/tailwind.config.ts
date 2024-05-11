@@ -13,6 +13,10 @@ const config: Config = {
         purple_25: '#7E7BB9',
         purple_55: '#6A679E',
         purple_75: '#4C489D',
+        primary: '#F5F5F5',
+        primary_50: '#2ca9bc',
+        secondary: '#2D333A',
+        background: '#F1F1F1',
       },
       container: {
         center: true,
@@ -30,7 +34,7 @@ const config: Config = {
       },
       backgroundImage: {
         bg_login: 'linear-gradient(90deg, #5D54A4, #7C78B8)',
-        bg_shape: 'linear-gradient(270deg, #5D54A4, #6A679E)'
+        bg_shape: 'linear-gradient(270deg, #5D54A4, #6A679E)',
       }
     },
   },
